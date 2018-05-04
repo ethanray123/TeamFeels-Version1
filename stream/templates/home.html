@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+	<ul class="collection">
+		{% for lobby in lobbies %}
+		<li class="collection-item">{{lobby.name}}</li>
+		{% endfor %}
+	</ul>
+{% endblock content %}
