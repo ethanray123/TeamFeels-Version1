@@ -8,7 +8,6 @@ class Streamer(models.Model):
         on_delete=models.CASCADE,
         related_name='name'
     )
-    lobby = models.CharField(max_length=50)
 
 
 # Not sure if this is right but ImageField requires pip install Pillow to use
@@ -23,7 +22,6 @@ class Stream(models.Model):
 # If this is a wrong approach then just change it temporarily to CharField
 class Lobby(models.Model):
     lobbyname = models.CharField(max_length=50)
-    streamers = models.CharField(User, on_delete=models.CASCADE)
     logo = models.ImageField(upload_to=None)
     description = models.CharField(max_length=200)
 
