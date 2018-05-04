@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class StreamingConfig(AppConfig):
-    name = 'streaming'
+class StreamConfig(AppConfig):
+    name = 'stream'
