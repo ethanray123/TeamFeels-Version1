@@ -1,11 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Home{% endblock %}
 
 {% block content %}
 	<ul class="collection">
 		{% for lobby in lobbies %}
-		<li class="collection-item">{{lobby.name}}</li>
+		<li class="collection-item">{{lobby.lobbyname}}</li>
+		<li class="collection-item"><img src="../{{lobby.logo}}"></li>
+		<li class="collection-item">{{lobby.description}}</li>
 		{% endfor %}
 	</ul>
 {% endblock content %}

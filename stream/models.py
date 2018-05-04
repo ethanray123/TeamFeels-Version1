@@ -17,7 +17,7 @@ class Streamer(models.Model):
 # If this is a wrong approach then just change it temporarily to CharField
 class Stream(models.Model):
     title = models.CharField(max_length=50)
-    thumbnail = models.ImageField(upload_to='templates/images', blank=True)
+    thumbnail = models.ImageField(upload_to='stream/static/images', blank=True)
     streamer = models.ForeignKey(Streamer, on_delete=models.PROTECT)
 
     def __str__(self):
@@ -29,7 +29,7 @@ class Stream(models.Model):
 class Lobby(models.Model):
     lobbyname = models.CharField(max_length=50)
     # Set a default image
-    logo = models.ImageField(upload_to='templates/images', blank=True)
+    logo = models.ImageField(upload_to='stream/static/images', blank=True)
     description = models.CharField(max_length=200, blank=True)
 
     def __str__(self):

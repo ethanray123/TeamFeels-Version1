@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Stream, Streamer, Lobby, Streamer_lobby
 
+
 class StreamerLobby(admin.ModelAdmin):
     list_display = ('lobbies', 'streamers')
     list_filter = ['lobbies']
