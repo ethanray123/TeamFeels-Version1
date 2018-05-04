@@ -6,8 +6,10 @@
 {% block content %}
 	<ul class="collection">
 		{% for lobby in lobbies %}
-		<li class="collection-item">{{lobby.lobbyname}}</li>
-		<li class="collection-item"><img src="{{lobby.logo}}"></li>
+		<li class="collection-item">
+			<img class="thumbnail" src="{{lobby.logo.url}}">
+			<h3>{{lobby.lobbyname}}</h3>
+		</li>
 		<li class="collection-item">{{lobby.description}}</li>
 		{% endfor %}
 	</ul>
