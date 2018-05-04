@@ -1,5 +1,5 @@
 """
-WSGI config for version1 project.
+WSGI config for Stream project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

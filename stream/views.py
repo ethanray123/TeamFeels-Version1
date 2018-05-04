@@ -7,7 +7,8 @@ class HomeView(ListView):
     template_name = "home.html"
     context_object_name = "lobbies"
 
+
 class LobbyView(ListView):
-	model = Lobby
-	template_name = "stream/lobby.html"
-	context_object_name = "lobbies"
+    model = Lobby
+    template_name = "stream/lobby.html"
+    context_object_name = "lobbies"
