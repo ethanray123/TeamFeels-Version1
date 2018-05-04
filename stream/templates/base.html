@@ -1,0 +1,33 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html>
+<head>
+ 	<meta charset="utf-8">
+ 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">		
+  <title>{% block title %}{% endblock %}</title>
+  <style>
+  	.thumbnail{
+		height: 100px;
+		width : 100px;
+  	}
+  </style>
+</head>
+<body>
+	<main>
+	<header class="container center-align">
+		<h1>Streaming App</h1>
+	</header>
+	<div class="container">
+		{% block content %}
+		{% endblock content %}
+		<br>
+	</div>
+	</main>
+</body>
+</html>
+<script>
+  function goBack(){
+    window.history.back();
+  }
+</script>
