@@ -7,5 +7,5 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', HomeView.as_view(), name='home'),
-    path('stream/', include('stream.urls')),
+    path('stream/', include('streaming.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
