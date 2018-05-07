@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Streamer: {{streamer}}{% endblock %}
+
+{% block content %}
+	<h2>Streamer Details</h2>
+	<ul class="collection">
+		<li class="collection-item">
+			<p>{{streamer.user}}</p>
+			<p>{{streamer.user.firstname}}</p>
+			<p>{{streamer.user.lastname}}</p>
+			<h3>Streamer's Affiliated Lobbies:</h3>
+			{% for lobby in streamer.lobbies %}
+				
+			{% endfor %}
+		</li>
+		
+		{% endfor %}
+	</ul>
+{% endblock content %}
