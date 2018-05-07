@@ -10,7 +10,7 @@ class Streamer(models.Model):
     )
 
     def __str__(self):
-        return self.user.get_full_name()
+        return self.user.username
 
 
 # Not sure if this is right but ImageField requires pip install Pillow to use
@@ -37,9 +37,9 @@ class Lobby(models.Model):
     def __str__(self):
         return self.lobbyname
 
-    # @property
-    # def streamers(self):
-    #     return self.lobby_of_streamer.
+    @property
+    def streamers(self):
+        return self.lobby_of_streamer.filter(lobbies=self)
 
 
 # "Bridge" between streamers and lobby to prevent use of ManyToMany Field
@@ -55,7 +55,3 @@ class Streamer_lobby(models.Model):
         on_delete=models.CASCADE,
         related_name='lobby_of_streamer'
     )
-
-    @property
-    def streamer(self):
-        return self.streamer_info.order_by("user__last_name")

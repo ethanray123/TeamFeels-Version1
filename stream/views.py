@@ -9,6 +9,6 @@ class HomeView(ListView):
 
 
 class LobbyView(DetailView):
-    model = Streamer_lobby
+    model = Lobby
     template_name = "stream/lobby.html"
-    context_object_name = "lobby_info"
+    context_object_name = "lobby"
