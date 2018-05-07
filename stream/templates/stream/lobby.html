@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}Lobby: {% endblock title %}
+
+{% block content %}
+	{% if lobby_info %}
+	<h3>{{lobby_info.lobbies.lobbyname}}</h3>
+	<ul class="collection">
+		<li class="collection-item">
+			<ul>
+			<!-- {% for streamer in lobby_info.lobbies.streamers %} -->
+				<li>
+					<h5>{{lobby_info.lobbies.streamers.user}}</h5>
+				</li>
+			<!-- {% endfor %} -->
+			</ul>
+		</li>
+	</ul>
+	{% else %}
+	<h3>404 lobby not found</h3>
+	{% endif %}
+{% endblock content %}

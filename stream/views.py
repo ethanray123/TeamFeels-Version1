@@ -1,3 +1,14 @@
-from django.shortcuts import render
+from django.views.generic import ListView, DetailView
+from .models import Lobby, Streamer_lobby
 
-# Create your views here.
+
+class HomeView(ListView):
+    model = Lobby
+    template_name = "home.html"
+    context_object_name = "lobbies"
+
+
+class LobbyView(DetailView):
+    model = Streamer_lobby
+    template_name = "stream/lobby.html"
+    context_object_name = "lobby_info"

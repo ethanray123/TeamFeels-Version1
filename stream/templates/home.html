@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+	<ul class="collection">
+		{% for lobby in lobbies %}
+		<li class="collection-item">
+			<img class="thumbnail" src="{{lobby.logo.url}}">
+			<a href="{% url 'stream:lobby-detail' lobby.id %}"><h3>{{lobby.lobbyname}}</h3></a>
+		</li>
+		<li class="collection-item">{{lobby.description}}</li>
+		{% endfor %}
+	</ul>
+{% endblock content %}
