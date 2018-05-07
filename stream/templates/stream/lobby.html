@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
-{% block title %}Lobby: {% endblock title %}
+{% block title %}Lobby: {{lobby}}{% endblock title %}
 
 {% block content %}
-	{% if lobby_info %}
-	<h3>{{lobby_info.lobbies.lobbyname}}</h3>
+	{% if lobby %}
+	<h3>{{lobby}}</h3>
 	<ul class="collection">
 		<li class="collection-item">
 			<ul>
-			<!-- {% for streamer in lobby_info.lobbies.streamers %} -->
+			{% for stream in lobby.streamers %}
 				<li>
-					<h5>{{lobby_info.lobbies.streamers.user}}</h5>
+					<h5>{{stream.streamers}}</h5>
 				</li>
-			<!-- {% endfor %} -->
+			{% endfor %}
 			</ul>
 		</li>
 	</ul>
