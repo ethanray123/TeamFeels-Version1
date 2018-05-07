@@ -4,15 +4,23 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-	<h2>List of Lobbies</h2>
-	<ul class="collection">
-		{% for lobby in lobbies %}
-		<li class="collection-item">
-			<img class="thumbnail" src="{{lobby.logo.url}}">
-			<a href="{% url 'stream:lobby-detail' lobby.id %}"><h3>{{lobby.lobbyname}}</h3></a>
-			<p>{{lobby.description}}</p>
-		</li>
-		
-		{% endfor %}
-	</ul>
+	{% if user.is_authenticated %}
+	    <h2>Hi {{ user.username }}! </h2>
+		<h2>List of Lobbies</h2>
+		<ul class="collection">
+			{% for lobby in lobbies %}
+			<li class="collection-item">
+				<img class="thumbnail" src="{{lobby.logo.url}}">
+				<a href="{% url 'stream:lobby-detail' lobby.id %}"><h3>{{lobby.lobbyname}}</h3></a>
+				<p>{{lobby.description}}</p>
+			</li>
+			
+			{% endfor %}
+		</ul>
+		<br><br>
+    	<a href="{% url 'logout' %}" class="btn">logout</a>
+	{% else %}
+		<h3>You are not logged in...</h3>
+    	<a href="{% url 'login' %}" class="btn">login</a>
+  	{% endif %}
 {% endblock content %}

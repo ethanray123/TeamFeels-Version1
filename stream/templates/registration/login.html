@@ -1,0 +1,19 @@
+<!-- templates/registration/login.html -->
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h3>You are already logged in</h3>
+<a href="{% url 'home' %}">Home</a>
+{% else %}
+<h2>Login</h2>
+<form method="post">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<button class="btn" type="submit">Login</button>
+</form>
+<h4>Dont have an account?</h4><a href="{% url 'stream:register' %}">Register</a>
+{% endif %}
+{% endblock %}
