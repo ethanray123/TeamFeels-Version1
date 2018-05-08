@@ -1,21 +1,29 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Lobby: {{lobby}}{% endblock title %}
 
 {% block content %}
-	{% if lobby %}
-	<h3>{{lobby}}</h3>
-	<ul class="collection">
-		<li class="collection-item">
-			<ul>
-			{% for stream in lobby.streamers %}
-				<li>
-					<h5>{{stream.streamers}}</h5>
-				</li>
-			{% endfor %}
-			</ul>
-		</li>
-	</ul>
+	{% if user.is_authenticated %}
+		{% if lobby %}
+		<h3>{{lobby}}</h3>
+		<ul class="collection">
+			<li class="collection-item">
+				<ul>
+				{% for stream in lobby.streamers %}
+					<li>
+						<!-- <a href=""> -->
+							<h5>{{stream.streamers}}</h5>
+						<!-- </a> -->
+					</li>
+				{% endfor %}
+				</ul>
+			</li>
+		</ul>
+		{% else %}
+		<h3>404 lobby not found</h3>
+		{% endif %}
 	{% else %}
-	<h3>404 lobby not found</h3>
-	{% endif %}
+		<h3>You are not logged in...</h3>
+    	<a href="{% url 'login' %}" class="btn">login</a>
+  	{% endif %}
 {% endblock content %}

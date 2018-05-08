@@ -12,6 +12,10 @@ class Streamer(models.Model):
     def __str__(self):
         return self.user.username
 
+    @property
+    def lobbies(self):
+        return self.streamer_in_lobby.filter(streamers=self)
+
 
 # Not sure if this is right but ImageField requires pip install Pillow to use
 # If this is a wrong approach then just change it temporarily to CharField
