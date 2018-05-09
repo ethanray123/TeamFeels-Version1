@@ -5,18 +5,21 @@
 
 {% block content %}
 	{% if user.is_authenticated %}
-	    <h2>Hi {{ user.username }}! </h2>
-	    <h2>Notifications</h2>
-	    <ul id="notif_id">
-	    {% for notification in notifications %}
-	    	<li>{{ notification.display }}</li>
-	   	{% endfor %}
-	    </ul>
-		<a style="font-size: 14px" id="see_more">See More...</a>
-		<h2>List of Lobbies</h2>
+	    <blockquote><h1>Hi {{ user.username }}! </h1></blockquote>
+	    {% if notifications %}
+		    <h2>Notifications</h2>
+		    <ul id="notif_id" class="collection">
+		    {% for notification in notifications %}
+		    	<li class="collection-item">{{ notification.display }}</li>
+		   	{% endfor %}
+		    </ul>
+			<a style="font-size: 14px" id="see_more">See More...</a>
+		{% endif %}
+		<h3>List of Lobbies</h3>
 		<ul class="collection">
 			{% for lobby in lobbies %}
 			<li class="collection-item">
+				<br>
 				<img class="thumbnail" src="{{lobby.logo.url}}">
 				<a href="{% url 'stream:lobby-detail' lobby.id %}"><h3>{{lobby.lobbyname}}</h3></a>
 				<p>{{lobby.description}}</p>
@@ -25,7 +28,6 @@
 			{% endfor %}
 		</ul>
 		<br><br>
-    	<a href="{% url 'logout' %}" class="btn">logout</a>
 	{% else %}
 		<h3>You are not logged in...</h3>
     	<a href="{% url 'login' %}" class="btn">login</a>

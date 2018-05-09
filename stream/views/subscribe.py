@@ -13,7 +13,8 @@ def subscribe(request, streamer_id):
         message = "you are now subscribed to " + subscribee.user.username + "!"
     else:
         if(subscribee.is_subscribed(subscriber)):
-            message = "you have already subscribed to " + subscribee.user.username
+            message = "you have already subscribed to " \
+                + subscribee.user.username
         else:
             message = "you cannot subscribe to yourself"
     return render(
