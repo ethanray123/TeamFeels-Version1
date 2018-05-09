@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Stream, Streamer, Lobby, Streamer_lobby
+from .models import Stream, Streamer, Lobby, Streamer_lobby,\
+    Subscription, Notification
 
 
 class StreamerLobby(admin.ModelAdmin):
@@ -16,3 +17,5 @@ admin.site.register(Stream, StreamerStream)
 admin.site.register(Streamer)
 admin.site.register(Lobby)
 admin.site.register(Streamer_lobby, StreamerLobby)
+admin.site.register(Subscription)
+admin.site.register(Notification)

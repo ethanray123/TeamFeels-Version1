@@ -2,6 +2,7 @@ from django.urls import path
 # from . import views
 from .views import HomeView, UserFormView, LobbyView
 
+
 app_name = 'stream'
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
