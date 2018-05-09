@@ -8,22 +8,24 @@
 {% block content %}
 	{% if user.is_authenticated %}
 		{% if lobby %}
-		<h3>{{lobby}}</h3>
+		<h3>Live now in {{lobby}}</h3>
 		<ul class="collection">
 			<li class="collection-item">
 				<ul>
 				{% for stream in lobby.streamers %}
-					<li>
-						<h5>{{stream.title}}</h5> 
-						<img class="thumbnail" src="{{stream.thumbnail.url}}">
-						<br>
-						<div class="streamer">
-							<a href="{% url 'stream:streamer-detail' stream.id %}">
-								<span>{{stream.user}}</span>
-							</a>
-							<a href="{% url 'stream:subscribe' stream.id %}" class="btn">Subscribe</a>
-						</div>
-					</li>
+					{% if stream.title != "" and stream.thumbnail != Null %}
+						<li>
+							<h5>{{stream.title}}</h5> 
+							<img class="thumbnail" src="{{stream.thumbnail.url}}">
+							<br>
+							<div class="streamer">
+								<a href="{% url 'stream:streamer-detail' stream.id %}">
+									<span>{{stream.user}}</span>
+								</a>
+								<a href="{% url 'stream:subscribe' stream.id %}" class="btn">Subscribe</a>
+							</div>
+						</li>
+					{% endif %}
 				{% endfor %}
 				</ul>
 			</li>

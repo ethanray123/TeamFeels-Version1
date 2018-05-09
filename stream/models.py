@@ -74,7 +74,7 @@ class Lobby(models.Model):
 
 # "Bridge" between streamers and lobby to prevent use of ManyToMany Field
 class Stream(models.Model):
-    title = models.CharField(max_length=30)
+    title = models.CharField(max_length=30, blank=True)
     thumbnail = models.ImageField(
         upload_to='stream/static/images', blank=True, null=True)
     streamers = models.ForeignKey(
