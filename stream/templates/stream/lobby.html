@@ -1,24 +1,40 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block additionalCss %}
+	<link rel="stylesheet" type="text/css" href="{% static 'stream/lobby.css' %}">
+{% endblock additionalCss %}
 {% block title %}Lobby: {{lobby}}{% endblock title %}
 
 {% block content %}
 	{% if user.is_authenticated %}
 		{% if lobby %}
-		<h3>{{lobby}}</h3>
+		<h3>Live now in {{lobby}}</h3>
+		<div class="row">
 		<ul class="collection">
-			<li class="collection-item">
+			<li class="collection-item col m4">
 				<ul>
 				{% for stream in lobby.streamers %}
-					<li>
-						<!-- <a href=""> -->
-							<h5>{{stream.streamers}}</h5>
-						<!-- </a> -->
-					</li>
+					{% if stream.title != "" and stream.thumbnail != Null %}
+						<li>
+							<h5>{{stream.title}}</h5> 
+							<a href="{% url 'stream:streamer-detail' stream.id %}">{{stream}}</a> <br>
+							<img class="thumbnail" src="{{stream.thumbnail.url}}">
+							<br>
+							<a href="{% url 'stream:subscribe' stream.id %}" class="btn"><i class="tiny material-icons">star</i></a>
+							{% if lobby.owner == request.user %}
+								<a href="" class="btn"><i class="tiny material-icons">edit</i></a>
+							{% endif %}
+						</li>
+						<br>
+					{% endif %}
 				{% endfor %}
 				</ul>
 			</li>
+			<div class="collection-item col m8">
+				<!-- Video goes here -->
+			</div>
 		</ul>
+		</div>
 		{% else %}
 		<h3>404 lobby not found</h3>
 		{% endif %}

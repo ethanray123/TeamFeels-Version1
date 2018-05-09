@@ -8,14 +8,26 @@
  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{% static 'stream/base.css' %}">
+	{% block additionalCss %}{% endblock additionalCss %}
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
   <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
 	<main>
 	<header class="container center-align">
-		<h1>Streaming App</h1>
+		<h2>Streaming App</h2>
 	</header>
 	<div class="container">
+		{% if user.is_authenticated %}
+		<div class="row">
+			<div class="col s1 offset-s10">
+				<a href="{% url 'home' %}" class="btn">Back</a>
+			</div>
+			<div class="col s1">
+				<a href="{% url 'logout' %}" class="btn">logout</a>
+			</div>
+		</div>
+		{% endif %}
 		{% block content %}
 		{% endblock content %}
 		<br>

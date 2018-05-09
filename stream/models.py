@@ -14,7 +14,7 @@ class Streamer(models.Model):
 
     @property
     def lobbies(self):
-        return self.streamer_in_lobby.filter(streamers=self)
+        return self.streamer_in_lobby.filter(streamers=self)  # streamers
 
     def subcribes(self, publisher):
         if not self == publisher:
@@ -45,22 +45,18 @@ class Streamer(models.Model):
         # return Notification.objects.filter(
         #     publisher=publishers.objects.values("publisher"))
 
-
-# Not sure if this is right but ImageField requires pip install Pillow to use
-# If this is a wrong approach then just change it temporarily to CharField
-class Stream(models.Model):
-    title = models.CharField(max_length=50)
-    thumbnail = models.ImageField(
-        upload_to='stream/static/images', blank=True, null=True)
-    streamer = models.ForeignKey(Streamer, on_delete=models.PROTECT)
-
-    def __str__(self):
-        return self.title
+    def is_subscribed(self, publisher):
+        return Subscription.objects.filter(
+            subscriber=publisher, publisher=self).exists()
 
 
-# Not sure if this is right but ImageField requires pip install Pillow to use
-# If this is a wrong approach then just change it temporarily to CharField
 class Lobby(models.Model):
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT,
+        related_name='lobby_owner'
+    )
+
     lobbyname = models.CharField(max_length=50)
     # Set a default image
     logo = models.ImageField(
@@ -71,12 +67,16 @@ class Lobby(models.Model):
         return self.lobbyname
 
     @property
+    # Get Streamers in this Lobby
     def streamers(self):
-        return self.lobby_of_streamer.filter(lobbies=self)
+        return Stream.objects.filter(lobbies=self)
 
 
 # "Bridge" between streamers and lobby to prevent use of ManyToMany Field
-class Streamer_lobby(models.Model):
+class Stream(models.Model):
+    title = models.CharField(max_length=30, blank=True)
+    thumbnail = models.ImageField(
+        upload_to='stream/static/images', blank=True, null=True)
     streamers = models.ForeignKey(
         Streamer,
         on_delete=models.PROTECT,
@@ -88,6 +88,9 @@ class Streamer_lobby(models.Model):
         on_delete=models.CASCADE,
         related_name='lobby_of_streamer'
     )
+
+    def __str__(self):
+        return self.streamers.user.username
 
 
 class Subscription(models.Model):
@@ -118,3 +121,18 @@ class Notification(models.Model):
             self.publisher,
             self.description,
             self.published.strftime("%b %d, %Y at %I:%M:%S %p"))
+
+
+# previous implementation of Stream
+# class Stream(models.Model):
+#     title = models.CharField(max_length=50)
+#     thumbnail = models.ImageField(
+#         upload_to='stream/static/images', blank=True, null=True)
+#     streamer = models.ForeignKey(
+#         Streamer,
+#         on_delete=models.PROTECT,
+#         related_name="stream_owner"
+#     )
+
+#     def __str__(self):
+#         return self.title
