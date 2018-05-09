@@ -23,7 +23,11 @@ class Stream(models.Model):
     title = models.CharField(max_length=50)
     thumbnail = models.ImageField(
         upload_to='stream/static/images', blank=True, null=True)
-    streamer = models.ForeignKey(Streamer, on_delete=models.PROTECT)
+    streamer = models.ForeignKey(
+        Streamer,
+        on_delete=models.PROTECT,
+        related_name="stream_owner"
+    )
 
     def __str__(self):
         return self.title
@@ -32,6 +36,12 @@ class Stream(models.Model):
 # Not sure if this is right but ImageField requires pip install Pillow to use
 # If this is a wrong approach then just change it temporarily to CharField
 class Lobby(models.Model):
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.PROTECT,
+        related_name='lobby_owner'
+    )
+
     lobbyname = models.CharField(max_length=50)
     # Set a default image
     logo = models.ImageField(
@@ -42,19 +52,24 @@ class Lobby(models.Model):
         return self.lobbyname
 
     @property
+    # Get Streamers in this Lobby
     def streamers(self):
-        return self.lobby_of_streamer.filter(lobbies=self)
+        return self.lobby_of_streamer.streamer.filter(lobby=self)
+
+    # Get Streams of Streamers in this Lobby
+    def streams(self):
+        return self.lobby_of_streamer.stream_owner.filter(lobby=self)
 
 
 # "Bridge" between streamers and lobby to prevent use of ManyToMany Field
 class Streamer_lobby(models.Model):
-    streamers = models.ForeignKey(
+    streamer = models.ForeignKey(
         Streamer,
         on_delete=models.PROTECT,
         related_name='streamer_in_lobby',
         null=True
     )
-    lobbies = models.ForeignKey(
+    lobby = models.ForeignKey(
         Lobby,
         on_delete=models.CASCADE,
         related_name='lobby_of_streamer'
