@@ -11,9 +11,11 @@
 				<ul>
 				{% for stream in lobby.streamers %}
 					<li>
-						<!-- <a href=""> -->
-							<h5>{{stream.streamer}}</h5>
-						<!-- </a> -->
+						<h4>{{stream.title}}</h4> 
+						<a href="{% url 'stream:streamer-detail' stream.id %}">
+							<h6>{{stream}}</h6>
+						</a>
+						<img class="thumbnail" src="{{stream.thumbnail.url}}">
 					</li>
 				{% endfor %}
 				</ul>

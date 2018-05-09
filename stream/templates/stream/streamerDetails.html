@@ -11,11 +11,9 @@
 			<p>{{streamer.user.firstname}}</p>
 			<p>{{streamer.user.lastname}}</p>
 			<h3>Streamer's Affiliated Lobbies:</h3>
-			{% for lobby in streamer.lobbies %}
-				
+			{% for streamer_lobby in streamer.lobbies %}
+				{{streamer_lobby.lobbies}}
 			{% endfor %}
 		</li>
-		
-		{% endfor %}
 	</ul>
 {% endblock content %}
