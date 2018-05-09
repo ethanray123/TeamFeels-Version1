@@ -45,25 +45,11 @@ class Streamer(models.Model):
         # return Notification.objects.filter(
         #     publisher=publishers.objects.values("publisher"))
 
-
-# Not sure if this is right but ImageField requires pip install Pillow to use
-# If this is a wrong approach then just change it temporarily to CharField
-# class Stream(models.Model):
-#     title = models.CharField(max_length=50)
-#     thumbnail = models.ImageField(
-#         upload_to='stream/static/images', blank=True, null=True)
-#     streamer = models.ForeignKey(
-#         Streamer,
-#         on_delete=models.PROTECT,
-#         related_name="stream_owner"
-#     )
-
-#     def __str__(self):
-#         return self.title
+    def is_subscribed(self, publisher):
+        return Subscription.objects.filter(
+            subscriber=publisher, publisher=self).exists()
 
 
-# Not sure if this is right but ImageField requires pip install Pillow to use
-# If this is a wrong approach then just change it temporarily to CharField
 class Lobby(models.Model):
     owner = models.ForeignKey(
         User,
@@ -135,3 +121,18 @@ class Notification(models.Model):
             self.publisher,
             self.description,
             self.published.strftime("%b %d, %Y at %I:%M:%S %p"))
+
+
+# previous implementation of Stream
+# class Stream(models.Model):
+#     title = models.CharField(max_length=50)
+#     thumbnail = models.ImageField(
+#         upload_to='stream/static/images', blank=True, null=True)
+#     streamer = models.ForeignKey(
+#         Streamer,
+#         on_delete=models.PROTECT,
+#         related_name="stream_owner"
+#     )
+
+#     def __str__(self):
+#         return self.title

@@ -1,0 +1,9 @@
+.streamer{
+	display: inline-block;
+}
+
+span{
+	padding-top: 30px;
+	font-size: 20px;
+	color: black;
+}

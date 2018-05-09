@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block additionalCss %}
+	<link rel="stylesheet" type="text/css" href="{% static 'stream/lobby.css' %}">
+{% endblock additionalCss %}
 {% block title %}Lobby: {{lobby}}{% endblock title %}
 
 {% block content %}
@@ -11,11 +14,15 @@
 				<ul>
 				{% for stream in lobby.streamers %}
 					<li>
-						<h4>{{stream.title}}</h4> 
-						<a href="{% url 'stream:streamer-detail' stream.id %}">
-							<h6>{{stream}}</h6>
-						</a>
+						<h5>{{stream.title}}</h5> 
 						<img class="thumbnail" src="{{stream.thumbnail.url}}">
+						<br>
+						<div class="streamer">
+							<a href="{% url 'stream:streamer-detail' stream.id %}">
+								<span>{{stream.user}}</span>
+							</a>
+							<a href="{% url 'stream:subscribe' stream.id %}" class="btn">Subscribe</a>
+						</div>
 					</li>
 				{% endfor %}
 				</ul>

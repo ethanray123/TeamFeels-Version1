@@ -8,6 +8,8 @@
  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{% static 'stream/base.css' %}">
+	{% block additionalCss %}{% endblock additionalCss %}
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
   <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
