@@ -16,6 +16,35 @@ class Streamer(models.Model):
     def lobbies(self):
         return self.streamer_in_lobby.filter(streamers=self)
 
+    def subcribes(self, publisher):
+        if not self == publisher:
+            Subscription.objects.create(subscriber=self, publisher=publisher)
+
+    def unsubscibes(self, publisher):
+        Subscription.objects.filter(
+            subscriber=self, publisher=publisher).delete()
+
+    def create_notification(self, description):
+        Notification.objects.create(publisher=self, description=description)
+
+    def get_notifications(self):
+        publishers = Subscription.objects.values(
+            "publisher").filter(subscriber=self)
+        notification = Notification.objects.filter(
+            publisher__in=publishers).order_by('-published')[:5]
+        return notification
+
+    def get_all_notifications(self):
+        publishers = Subscription.objects.values(
+            "publisher").filter(subscriber=self)
+        notification = Notification.objects.filter(
+            publisher__in=publishers).order_by('-published')
+        return notification
+        # publishers = Subscription.objects.filter(
+        #     subscriber=self)
+        # return Notification.objects.filter(
+        #     publisher=publishers.objects.values("publisher"))
+
 
 # Not sure if this is right but ImageField requires pip install Pillow to use
 # If this is a wrong approach then just change it temporarily to CharField
@@ -74,3 +103,33 @@ class Streamer_lobby(models.Model):
         on_delete=models.CASCADE,
         related_name='lobby_of_streamer'
     )
+
+
+class Subscription(models.Model):
+    subscriber = models.ForeignKey(
+        Streamer,
+        on_delete=models.CASCADE, related_name='subscribers')
+    publisher = models.ForeignKey(
+        Streamer,
+        on_delete=models.CASCADE, related_name='publishers')
+
+    def __str__(self):
+        return ("{} subcribes to {}").format(self.subscriber, self.publisher)
+
+
+class Notification(models.Model):
+    publisher = models.ForeignKey(Streamer, on_delete=models.CASCADE)
+    description = models.CharField(max_length=200)
+    published = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "{} : {} : {}".format(
+            self.publisher,
+            self.description,
+            self.published.strftime("%b %d, %Y at %I:%M:%S %p"))
+
+    def display(self):
+        return "{} : {} : {}".format(
+            self.publisher,
+            self.description,
+            self.published.strftime("%b %d, %Y at %I:%M:%S %p"))
