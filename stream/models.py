@@ -40,14 +40,14 @@ class Streamer(models.Model):
         notification = Notification.objects.filter(
             publisher__in=publishers).order_by('-published')
         return notification
-        # publishers = Subscription.objects.filter(
-        #     subscriber=self)
-        # return Notification.objects.filter(
-        #     publisher=publishers.objects.values("publisher"))
 
     def is_subscribed(self, publisher):
         return Subscription.objects.filter(
             subscriber=publisher, publisher=self).exists()
+
+    def is_reported(self, violator):
+        return Report.objects.filter(
+            reporter=violator, violator=self).exists()
 
 
 class Lobby(models.Model):
@@ -105,6 +105,18 @@ class Subscription(models.Model):
         return ("{} subcribes to {}").format(self.subscriber, self.publisher)
 
 
+class Report(models.Model):
+    reporter = models.ForeignKey(
+        Streamer,
+        on_delete=models.CASCADE, related_name='reports')
+    violator = models.ForeignKey(
+        Streamer,
+        on_delete=models.CASCADE, related_name='violations')
+
+    def __str__(self):
+        return ("{} reports {}").format(self.reporter, self.violator)
+
+
 class Notification(models.Model):
     publisher = models.ForeignKey(Streamer, on_delete=models.CASCADE)
     description = models.CharField(max_length=200)
@@ -121,18 +133,3 @@ class Notification(models.Model):
             self.publisher,
             self.description,
             self.published.strftime("%b %d, %Y at %I:%M:%S %p"))
-
-
-# previous implementation of Stream
-# class Stream(models.Model):
-#     title = models.CharField(max_length=50)
-#     thumbnail = models.ImageField(
-#         upload_to='stream/static/images', blank=True, null=True)
-#     streamer = models.ForeignKey(
-#         Streamer,
-#         on_delete=models.PROTECT,
-#         related_name="stream_owner"
-#     )
-
-#     def __str__(self):
-#         return self.title
