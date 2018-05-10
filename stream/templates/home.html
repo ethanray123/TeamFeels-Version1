@@ -10,8 +10,8 @@
 {% block content %}
 	{% if user.is_authenticated %}
 	    <blockquote><h1>Hi {{ user.username }}! </h1></blockquote>
-   		<input type="text" name="text" id="search" style="width: 500px" autocomplete="off">
-    	<button>Search</button>
+   		<input type="text" name="text" id="search" style="width: 500px" autocomplete="off" placeholder="Search">
+    	{#<button>Search</button> #}
     	<ul id="search_result" style="background-color: #e4e4e4; width: 500px" class="list-group"></ul>
 	    {% if notifications %}
 		    <h2>Notifications</h2>
