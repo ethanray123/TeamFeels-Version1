@@ -3,21 +3,8 @@
 
 {% block title %}Home{% endblock %}
 
-{% block additionalCss %}
-<style type="text/css">
-    ul#search_result{
-        position: absolute;
-        z-index: 1000;
-    }
-    ul#search_result li{
-        padding: 2px 5px 2px 5px;
-    }
-    ul#search_result span.type{
-       color: grey;
-       float: right;
-       text-transform: uppercase;
-    }
-</style>
+{% block additionalCss %}-
+    <link rel="stylesheet" type="text/css" href="{% static 'stream/css/home.css' %}">
 {% endblock additionalCss %}
 
 {% block content %}
@@ -52,45 +39,9 @@
 		<h3>You are not logged in...</h3>
     	<a href="{% url 'login' %}" class="btn">login</a>
   	{% endif %}
-  	<script>
-  		$(function(){
-  			// cached the elements
-  			var $results_holder = $("#search_result");
-  			var $search_bar = $("#search");
 
-  			// clears the ul element with id "search_result" when input element
-  			// with id "search" is out of focus
-            $(document).click(function(e) {
-                if($(e.target).parents('#search_result').length == 0){
-                    $('body ul#search_result').empty();
-                    $('body input#search').val('');
-                }
-            });
-
-  			// performs ajax when keyup and focus event happens
-	  		$search_bar.on("keyup focus ", function(){
-	  			$.ajax({
-	  				type: 'GET',
-	  				url: 'stream/search_result/',
-	  				data: {'search_text': $search_bar.val()},
-	  				success: function(results){
-                    // appends all the search results in the the ul element
-                    // with id "search_result"
-                    // "results" is the json response from the server
-                        console.log(results);
-                        $results_holder.empty();
-                        $.each(results.streamers, function(i, streamer){
-                            $results_holder.append("<li><a href=\""+ streamer.url + "\">" + streamer.user__username + "</a><span class='type'>streamer</span></li>");
-                        });
-                        $.each(results.lobbies, function(i, lobby){
-                            $results_holder.append("<li><a href=\"" + lobby.url + "\">" + lobby.lobbyname + "</a><span class='type'>lobby</span></li>");
-                        });
-                        $.each(results.streams, function(i, stream){
-                            $results_holder.append("<li>" + stream.title + "<span class='type'>stream</span></li>");
-                        });
-                    }
-	  			});
-		  	});
-  		});
-  	</script>
 {% endblock content %}
+
+{% block additionalJS %}
+<script src="{% static 'stream/js/home.js' %}"></script>
+{% endblock additionalJS %}
