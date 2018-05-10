@@ -1,4 +1,4 @@
-from .home import HomeView
+from .home import HomeView, SearchView
 from .lobby import LobbyView
 from .userform import UserFormView
 from .streamer import StreamerView

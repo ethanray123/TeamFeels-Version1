@@ -6,6 +6,9 @@
 {% block content %}
 	{% if user.is_authenticated %}
 	    <blockquote><h1>Hi {{ user.username }}! </h1></blockquote>
+   		<input type="text" name="text" id="search" style="width: 500px" autocomplete="off">
+    	<button>Search</button>
+    	<ul id="search_result" style="background-color: lightgrey; width: 500px" ></ul>
 	    {% if notifications %}
 		    <h2>Notifications</h2>
 		    <ul id="notif_id" class="collection">
@@ -32,4 +35,44 @@
 		<h3>You are not logged in...</h3>
     	<a href="{% url 'login' %}" class="btn">login</a>
   	{% endif %}
+  	<script>
+  		$(function(){
+  			// cached the elements
+  			var $results_holder = $("#search_result");
+  			var $search_bar = $("#search");
+
+  			// clears the ul element with id "search_result" when input element
+  			// with id "search" is out of focus
+  			$search_bar.focusout(function(){
+				$results_holder.empty();
+  			});
+
+  			// performs ajax when keyup and focus event happens
+	  		$search_bar.on("keyup focus ", function(){
+	  			$.ajax({
+	  				type: 'GET',
+	  				url: 'stream/search_result/',
+	  				data: {'search_text': $search_bar.val()},
+	  				success: display_results // calls the function "display_results"
+	  			});
+		  	});
+
+	  		// appends all the search results in the the ul element
+	  		// with id "search_result"
+	  		// "results" is the json response from the server
+	  		function display_results(results){
+				console.log(results);
+				$results_holder.empty();
+				$.each(results.streamers, function(i, streamer){
+					$results_holder.append("<li>" + streamer.user__username + "<i style=\"color: grey\">streamer</i></li>");
+				});
+				$.each(results.lobbies, function(i, lobby){
+					$results_holder.append("<li>" + lobby.lobbyname + "<i style=\"color: grey\">lobby</i></li>");
+				});
+				$.each(results.streams, function(i, stream){
+					$results_holder.append("<li>" + stream.title + "<i style=\"color: grey\">stream</i></li>");
+				});
+	  		}
+  		});
+  	</script>
 {% endblock content %}
