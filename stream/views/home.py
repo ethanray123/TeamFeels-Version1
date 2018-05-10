@@ -28,15 +28,19 @@ class SearchView(View):
         text = request.GET['search_text']
         streamers = Streamer.objects.filter(
             user__username__icontains=text).values('pk', 'user__username')[:5]
+        for streamer in streamers:
+            streamer['url'] = reverse(
+                'stream:streamer-detail', args=[streamer['pk']])
         streams = Stream.objects.filter(
             title__icontains=text).values('pk', 'title')[:5]
         lobbies = Lobby.objects.filter(
             lobbyname__icontains=text).values('pk', 'lobbyname')[:5]
+        for lobby in lobbies:
+            lobby['url'] = reverse(
+                'stream:lobby-detail', args=[lobby['pk']])
         data = {
             'streamers': list(streamers),
             'streams': list(streams),
-            'lobbies': list(lobbies),
-            'streamer_url': reverse('stream:streamer-detail', args=[0]),
-            'lobby_url': reverse('stream:lobby-detail', args=[0])}
+            'lobbies': list(lobbies)}
         return HttpResponse(
             json.dumps(data), content_type="application/json")

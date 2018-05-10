@@ -80,14 +80,10 @@
                         console.log(results);
                         $results_holder.empty();
                         $.each(results.streamers, function(i, streamer){
-                            var url = results.streamer_url;
-                            url = url.replace("0", streamer.pk);
-                            $results_holder.append("<li><a href=\""+ url + "\">" + streamer.user__username + "</a><span class='type'>streamer</span></li>");
+                            $results_holder.append("<li><a href=\""+ streamer.url + "\">" + streamer.user__username + "</a><span class='type'>streamer</span></li>");
                         });
                         $.each(results.lobbies, function(i, lobby){
-                            var url = results.lobby_url;
-                            url = url.replace("0", lobby.pk);
-                            $results_holder.append("<li><a href=\"" + url + "\">" + lobby.lobbyname + "</a><span class='type'>lobby</span></li>");
+                            $results_holder.append("<li><a href=\"" + lobby.url + "\">" + lobby.lobbyname + "</a><span class='type'>lobby</span></li>");
                         });
                         $.each(results.streams, function(i, stream){
                             $results_holder.append("<li>" + stream.title + "<span class='type'>stream</span></li>");
