@@ -7,8 +7,8 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-        {% if error_message %}
-        <p><strong>{{ error_message }}</strong></p>
+        {% if message %}
+        <p><strong>{{ message }}</strong></p>
         {% endif %}
         {% if lobby %}
         <h3 class="deep-purple-text">Live now in {{lobby}}</h3>
@@ -23,14 +23,17 @@
                             <a href="{% url 'stream:streamer-detail' stream.streamers.id %}" id="streamer">{{stream}}</a> <br>
                             <img class="thumbnail" src="{{stream.thumbnail.url}}">
                             <br>
-                            {% if stream.streamers.user.id != request.user.id%}
+                            {% if stream.streamers.user.id != request.user.id %}
 
                             <a href="{% url 'stream:subscribe' stream.streamers.id lobby.id %}" class="btn-floating yellow darken-3"><i class="tiny material-icons">star</i></a>
-                            <a href="{% url 'stream:report' stream.id %}" class="btn-floating red"><i class="tiny material-icons">report_problem</i></a>
+                            <a href="{% url 'stream:report' stream.streamers.id lobby.id %}" class="btn-floating red"><i class="tiny material-icons">report_problem</i></a>
 
                             {% endif %}
-                            {% if lobby.owner == request.user %}
-                                <a href="" class="btn-floating blue"><i class="tiny material-icons">edit</i></a>
+
+                            {% if lobby.owner == request.user and stream.streamers.user.id == request.user.id%}
+                            
+                            <a href="{% url 'stream:edit_stream' stream.id lobby.id %}" class="btn-floating blue"><i class="tiny material-icons">edit</i></a>
+
                             {% endif %}
                         </li>
                         <br>
