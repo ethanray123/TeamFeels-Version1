@@ -11,7 +11,8 @@ urlpatterns = [
          name='lobby-detail'),
     path('streamer/<int:pk>', StreamerView.as_view(),
          name='streamer-detail'),
-    path('subscribe/<int:streamer_id>/<int:lobby_id>', subscribe, name='subscribe'),
+    path('subscribe/<int:streamer_id>/<int:lobby_id>',
+         subscribe, name='subscribe'),
     path('report/<int:streamer_id>', report, name='report'),
     path('search_result/', SearchView.as_view(), name='search_view')
 ]

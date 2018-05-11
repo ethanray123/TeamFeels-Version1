@@ -1,18 +1,20 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Home{% endblock %}
+{% block title %}Game On - Home{% endblock %}
 
-{% block additionalCss %}-
+{% block additionalCss %}
     <link rel="stylesheet" type="text/css" href="{% static 'stream/css/home.css' %}">
 {% endblock additionalCss %}
 
 {% block content %}
 	{% if user.is_authenticated %}
-	    <blockquote><h1>Hi {{ user.username }}! </h1></blockquote>
-   		<input type="text" name="text" id="search" style="width: 500px" autocomplete="off" placeholder="Search">
+
+	    <blockquote class="deep-purple-text"><h1>Hi {{ user.username }}! </h1></blockquote>
+	    <input type="text" name="text" id="search" style="width: 500px" autocomplete="off" placeholder="Search">
     	{#<button>Search</button> #}
     	<ul id="search_result" style="background-color: #e4e4e4; width: 500px" class="list-group"></ul>
+
 	    {% if notifications %}
 		    <h2>Notifications</h2>
 		    <ul id="notif_id" class="collection">
@@ -22,7 +24,7 @@
 		    </ul>
 			<a style="font-size: 14px" id="see_more">See More...</a>
 		{% endif %}
-		<h3>List of Lobbies</h3>
+		<h3 class="deep-purple-text">List of Lobbies</h3>
 		<ul class="collection">
 			{% for lobby in lobbies %}
 			<li class="collection-item">
@@ -37,7 +39,7 @@
 		<br><br>
 	{% else %}
 		<h3>You are not logged in...</h3>
-    	<a href="{% url 'login' %}" class="btn">login</a>
+    	<a href="{% url 'login' %}" class="btn deep-purple">login</a>
   	{% endif %}
 
 {% endblock content %}
