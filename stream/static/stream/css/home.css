@@ -1,0 +1,13 @@
+ul#search_result{
+    position: absolute;
+    z-index: 1000;
+}
+ul#search_result li{
+    padding: 2px 5px 2px 5px;
+}
+ul#search_result span.type{
+   color: grey;
+   float: right;
+   text-transform: uppercase;
+   font-style: italic;
+}
