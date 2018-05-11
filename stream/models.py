@@ -133,3 +133,16 @@ class Notification(models.Model):
             self.publisher,
             self.description,
             self.published.strftime("%b %d, %Y at %I:%M:%S %p"))
+
+
+class Comment(models.Model):
+    lobby = models.ForeignKey(Lobby, on_delete=models.CASCADE)
+    publisher = models.ForeignKey(Streamer, on_delete=models.CASCADE)
+    published = models.DateTimeField(auto_now_add=True)
+    comment = models.CharField(max_length=200)
+
+    def __str__(self):
+        return "{} : {} : {}".format(
+            self.publisher.user,
+            self.comment,
+            self.published.strftime("%b %d, %Y at %I:%M:%S %p"))

@@ -43,6 +43,15 @@
             </div>
         </ul>
         </div>
+        <!-- working on it -->
+        <div>
+            <h4>Comments</h4>
+            <ul id="comment_holder">
+            </ul>
+            <input type="text" name="comment" id="comment">
+            <button id="send">send</button>
+        </div>
+        <!-- end -->
         {% else %}
         <h3>404 lobby not found</h3>
         {% endif %}
@@ -51,3 +60,48 @@
         <a href="{% url 'login' %}" class="btn">login</a>
     {% endif %}
 {% endblock content %}
+{% block additionalJS %}
+<script>
+    var ctr = 0;
+$(function(){
+    $("button#send").click(function(){
+        $.ajax({
+            type: 'GET',
+            url: 'comments/',
+            data: {'comment_text': $("input#comment").val(),
+                'lobby_pk': '{{ lobby.pk }}',
+                'valid': "true"
+            },
+            success: function(data){
+                console.log(data);
+                $("#comment").val("");
+            }
+        });
+    });
+});
+// var ctr = 0;
+(function ajax_get(){
+    setTimeout(function(){
+        $.ajax({
+            type: 'GET',
+            url: 'comments/',
+            data: {'comment_text': $("input#comment").val(),
+                'lobby_pk': '{{ lobby.pk }}',
+                'valid': ""
+            },
+            success: function(data){
+                if(ctr != data.comments.length){
+                    ctr = data.comments.length;
+                    $("#comment_holder").empty();
+                    $.each(data.comments, function(ctr, comment){
+                        $("#comment_holder").append("<li>" + comment.publisher__user__username + " : "+ comment.comment +"</li>");
+                    });
+                }
+                console.log(data);
+                ajax_get();
+            }
+        });
+    }, 1000);
+})();
+</script>
+{% endblock additionalJS %}
