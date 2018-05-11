@@ -2,6 +2,7 @@ import json
 from django.views.generic import ListView, View
 from stream.models import Lobby, Streamer, Stream
 from django.http import HttpResponse, Http404
+from django.urls import reverse
 
 
 class HomeView(ListView):
@@ -27,10 +28,16 @@ class SearchView(View):
         text = request.GET['search_text']
         streamers = Streamer.objects.filter(
             user__username__icontains=text).values('pk', 'user__username')[:5]
+        for streamer in streamers:
+            streamer['url'] = reverse(
+                'stream:streamer-detail', args=[streamer['pk']])
         streams = Stream.objects.filter(
             title__icontains=text).values('pk', 'title')[:5]
         lobbies = Lobby.objects.filter(
             lobbyname__icontains=text).values('pk', 'lobbyname')[:5]
+        for lobby in lobbies:
+            lobby['url'] = reverse(
+                'stream:lobby-detail', args=[lobby['pk']])
         data = {
             'streamers': list(streamers),
             'streams': list(streams),
