@@ -8,6 +8,9 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
+  {% if error_message %}
+    <p><strong>{{ error_message }}</strong></p>
+  {% endif %}
 	<br>
 	<div class="container white z-depth-2">
 		<div id="register" class="col s3">
