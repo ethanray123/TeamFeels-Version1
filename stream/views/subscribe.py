@@ -22,6 +22,6 @@ def subscribe(request, streamer_id, lobby_id):
         request, 'stream/lobby.html',
         {
             'lobby': lobby,
-            'error_message': message,
+            'message': message,
         }
     )

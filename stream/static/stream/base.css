@@ -1,10 +1,10 @@
 .thumbnail{
 	height: 100px;
 	width : 150px;
-	}
+}
 body
 {
-	background: #f5f5f5; //f5f5f5
+	background: #f5f5f5; 
 }
 
 h5
@@ -14,4 +14,17 @@ h5
 
 nav .brand-logo {
     padding-left: 10px;
+}
+
+#live img{
+	height: 388px;
+	width : 600px;
+	border: solid 1px lightgray;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]), 
+input[type=email]:not(.browser-default):focus:not([readonly]), 
+input[type=password]:not(.browser-default):focus:not([readonly]){
+	border-bottom: 1px solid #673ab7;
+	box-shadow: 0 1px 0 0 #673ab7;
 }

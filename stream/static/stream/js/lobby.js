@@ -1,14 +1,18 @@
 $(function(){
-    $("button#send").click(function(){
-        $.ajax({
-            type: 'GET',
-            url: 'comments/',
-            data: {'comment_text': $("input#comment").val(),
-                'lobby_pk': '{{ lobby.pk }}'
-                },
-            success: function(data){
-                $("ul#comment_holder").append("<li>" + data.comment + "</li>");
-            }
-        });
+    $(".stuff").click(function() {
+        var img = $(this).find(".thumbnail").attr("src");
+        var user = $(this).find("#streamer").text()
+        var title = $(this).find("#title").text()
+        
+
+        $('#live img').fadeOut(400, function(){
+            $('#live img').attr('src', img);
+        }).fadeIn(400);
+
+
+        $('#live h5').fadeOut(400, function(){
+            $("#live h5").html(title + " - " + user);
+        }).fadeIn(400);
+
     });
 });

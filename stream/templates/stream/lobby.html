@@ -7,8 +7,8 @@
 
 {% block content %}
     {% if user.is_authenticated %}
-        {% if error_message %}
-        <p><strong>{{ error_message }}</strong></p>
+        {% if message %}
+        <p><strong>{{ message }}</strong></p>
         {% endif %}
         {% if lobby %}
         <h3 class="deep-purple-text">Live now in {{lobby}}</h3>
@@ -18,19 +18,22 @@
                 <ul>
                 {% for stream in lobby.streamers %}
                     {% if stream.title != "" and stream.thumbnail != Null %}
-                        <li>
-                            <h5>{{stream.title}}</h5>
-                            <a href="{% url 'stream:streamer-detail' stream.streamers.id %}">{{stream}}</a> <br>
+                        <li class="stuff">
+                            <h5 id="title">{{stream.title}}</h5>
+                            <a href="{% url 'stream:streamer-detail' stream.streamers.id %}" id="streamer">{{stream}}</a> <br>
                             <img class="thumbnail" src="{{stream.thumbnail.url}}">
                             <br>
-                            {% if stream.streamers.user.id != request.user.id%}
+                            {% if stream.streamers.user.id != request.user.id %}
 
                             <a href="{% url 'stream:subscribe' stream.streamers.id lobby.id %}" class="btn-floating yellow darken-3"><i class="tiny material-icons">star</i></a>
-                            <a href="{% url 'stream:report' stream.id %}" class="btn-floating red"><i class="tiny material-icons">report_problem</i></a>
+                            <a href="{% url 'stream:report' stream.streamers.id lobby.id %}" class="btn-floating red"><i class="tiny material-icons">report_problem</i></a>
 
                             {% endif %}
-                            {% if lobby.owner == request.user %}
-                                <a href="" class="btn-floating blue"><i class="tiny material-icons">edit</i></a>
+
+                            {% if lobby.owner == request.user and stream.streamers.user.id == request.user.id%}
+                            
+                            <a href="{% url 'stream:edit_stream' stream.id lobby.id %}" class="btn-floating blue"><i class="tiny material-icons">edit</i></a>
+
                             {% endif %}
                         </li>
                         <br>
@@ -38,8 +41,9 @@
                 {% endfor %}
                 </ul>
             </li>
-            <div class="collection-item col m8">
-                <!-- Video goes here -->
+            <div class="collection-item col m8" id="live">
+                <h5></h5>
+                <img src="/media/stream/static/images/placeholder.jpg">
             </div>
         </ul>
         </div>
@@ -61,6 +65,7 @@
     {% endif %}
 {% endblock content %}
 {% block additionalJS %}
+<script src="{% static 'stream/js/lobby.js' %}"></script>
 <script>
     var ctr = 0;
 $(function(){
