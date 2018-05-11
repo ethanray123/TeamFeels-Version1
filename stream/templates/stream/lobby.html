@@ -18,7 +18,7 @@
                 <ul>
                 {% for stream in lobby.streamers %}
                     {% if stream.title != "" and stream.thumbnail != Null %}
-                        <li>
+                        <li class="stuff">
                             <h5>{{stream.title}}</h5>
                             <a href="{% url 'stream:streamer-detail' stream.streamers.id %}">{{stream}}</a> <br>
                             <img class="thumbnail" src="{{stream.thumbnail.url}}">
@@ -38,8 +38,9 @@
                 {% endfor %}
                 </ul>
             </li>
-            <div class="collection-item col m8">
-                <!-- Video goes here -->
+            <div class="collection-item col m8" id="live">
+                <h5 >Stream Title - Streamer</h5>
+                <img src="/media/stream/static/images/placeholder.jpg">
             </div>
         </ul>
         </div>
@@ -51,3 +52,7 @@
         <a href="{% url 'login' %}" class="btn">login</a>
     {% endif %}
 {% endblock content %}
+
+{% block additionalJS %}
+<script src="{% static 'stream/js/lobby.js' %}"></script>
+{% endblock additionalJS %}
