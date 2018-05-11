@@ -16,7 +16,7 @@ $(function(){
     $search_bar.on("keyup focus ", function(){
         $.ajax({
             type: 'GET',
-            url: 'search_result/',
+            url: 'stream/search_result/',
             data: {'search_text': $search_bar.val()},
             success: function(results){
             // appends all the search results in the the ul element
