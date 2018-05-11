@@ -11,7 +11,7 @@
         <p><strong>{{ error_message }}</strong></p>
         {% endif %}
         {% if lobby %}
-        <h3>Live now in {{lobby}}</h3>
+        <h3 class="deep-purple-text">Live now in {{lobby}}</h3>
         <div class="row">
         <ul class="collection">
             <li class="collection-item col m4">
@@ -24,10 +24,10 @@
                             <img class="thumbnail" src="{{stream.thumbnail.url}}">
                             <br>
                             {% if stream.streamers.user.id != request.user.id%}
-                            <a href="{% url 'stream:subscribe' stream.streamers.id lobby.id %}" class="btn"><i class="tiny material-icons">star</i></a>
+                            <a href="{% url 'stream:subscribe' stream.streamers.id lobby.id %}" class="btn-floating yellow darken-3"><i class="tiny material-icons">star</i></a>
                             {% endif %}
                             {% if lobby.owner == request.user %}
-                                <a href="" class="btn"><i class="tiny material-icons">edit</i></a>
+                                <a href="" class="btn-floating blue"><i class="tiny material-icons">edit</i></a>
                             {% endif %}
                         </li>
                         <br>

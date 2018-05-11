@@ -11,3 +11,7 @@ h5
 {
 	font-weight: 400;
 }
+
+nav .brand-logo {
+    padding-left: 10px;
+}
