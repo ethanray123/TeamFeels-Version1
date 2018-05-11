@@ -5,18 +5,18 @@
 <link rel="stylesheet" type="text/css" href="{% static 'stream/streamEdit.css' %}" />
 {% endblock styles %}
 
-{% block title %}Home{% endblock title %}
+{% block title %}Stream Edit{% endblock title %}
 
 {% block content %}
-  {% if error_message %}
-    <p><strong>{{ error_message }}</strong></p>
+  {% if message %}
+    <p><strong>{{ message }}</strong></p>
   {% endif %}
 	<br>
 	<div class="container white z-depth-2">
 		<div id="register" class="col s3">
 			<div class="col s12 m12 l6">
         <div class="card-panel">
-          <h4 class="header2">Register</h4>
+          <h4 class="header2">Edit Stream</h4>
             <div class="row">
               <form class="col s12" action="" method="post" enctype="multipart/form-data">
 								{% csrf_token %}
