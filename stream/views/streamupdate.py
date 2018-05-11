@@ -1,29 +1,22 @@
-from django.shortcuts import render, redirect
-from django.views.generic import View
+from stream.models import Stream  # , Lobby
+from django.views.generic.edit import UpdateView
 from stream.forms import StreamForm
+from django.urls import reverse_lazy
+# from django.shortcuts import get_object_or_404, render
 
 
-class StreamFormView(View):
+class StreamFormView(UpdateView):
+    model = Stream
     form_class = StreamForm
     template_name = "stream/streamedit_form.html"
 
-    # display blank form
-    def get(self, request):
-        form = self.form_class(None)
-        return render(request, self.template_name, {'form': form})
-
-    # process form data
-    def post(self, request):
-        form = self.form_class(request.POST)
-
-        if form.is_valid():
-            # store data locally
-            stream = form.save(commit=False)
-
-            # save in database
-            stream.save()
-
-            # returns user objects if credentials are correct
-            return redirect('stream:home')
-
-        return render(request, self.template_name, {'form': form})
+    def get_success_url(self):
+        # lobbyid = self.request.GET.get('lobby_id')
+        # lobby = get_object_or_404(Lobby, pk=lobbyid)
+        # print(lobbyid)
+        # return render(
+        #     self.request, 'stream/lobby.html',
+        #     {
+        #         'lobby': lobby,
+        #     })
+        return reverse_lazy('stream:home')

@@ -7,7 +7,9 @@ app_name = 'stream'
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('register/', UserFormView.as_view(), name='register'),
-    path('stream/edit', StreamFormView.as_view(), name='edit_stream'),
+    path('streamedit/<int:pk>/<int:lobby_id>',
+         StreamFormView.as_view(),
+         name='edit_stream'),
     path('lobby/<int:pk>', LobbyView.as_view(),
          name='lobby-detail'),
     path('streamer/<int:pk>', StreamerView.as_view(),
