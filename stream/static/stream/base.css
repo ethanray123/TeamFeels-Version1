@@ -19,4 +19,5 @@ nav .brand-logo {
 #live img{
 	height: 388px;
 	width : 600px;
+	border: solid 1px lightgray;
 }
