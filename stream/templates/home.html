@@ -27,13 +27,14 @@
 		<h3 class="deep-purple-text">List of Lobbies</h3>
 		<ul class="collection">
 			{% for lobby in lobbies %}
+			{% if lobby.streamers %}
 			<li class="collection-item">
 				<br>
 				<img class="thumbnail" src="{{lobby.logo.url}}">
 				<a href="{% url 'stream:lobby-detail' lobby.id %}"><h3>{{lobby.lobbyname}}</h3></a>
 				<p>{{lobby.description}}</p>
 			</li>
-
+			{% endif %}
 			{% endfor %}
 		</ul>
 		<br><br>
