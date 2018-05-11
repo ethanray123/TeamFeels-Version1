@@ -19,12 +19,15 @@
                 {% for stream in lobby.streamers %}
                     {% if stream.title != "" and stream.thumbnail != Null %}
                         <li>
-                            <h5>{{stream.title}}</h5> 
+                            <h5>{{stream.title}}</h5>
                             <a href="{% url 'stream:streamer-detail' stream.streamers.id %}">{{stream}}</a> <br>
                             <img class="thumbnail" src="{{stream.thumbnail.url}}">
                             <br>
                             {% if stream.streamers.user.id != request.user.id%}
+
                             <a href="{% url 'stream:subscribe' stream.streamers.id lobby.id %}" class="btn-floating yellow darken-3"><i class="tiny material-icons">star</i></a>
+                            <a href="{% url 'stream:report' stream.id %}" class="btn-floating red"><i class="tiny material-icons">report_problem</i></a>
+
                             {% endif %}
                             {% if lobby.owner == request.user %}
                                 <a href="" class="btn-floating blue"><i class="tiny material-icons">edit</i></a>
