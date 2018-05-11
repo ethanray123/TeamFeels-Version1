@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import HomeView, UserFormView, LobbyView, \
-    StreamerView, subscribe, SearchView, report, StreamFormView
+    StreamerView, subscribe, SearchView, report, StreamFormView, CommentView
 
 
 app_name = 'stream'
@@ -16,7 +16,9 @@ urlpatterns = [
          name='streamer-detail'),
     path('subscribe/<int:streamer_id>/<int:lobby_id>',
          subscribe, name='subscribe'),
+    path('search_result/', SearchView.as_view(), name='search_view'),
+    path('lobby/comments/',
+         CommentView.as_view(), name='comment_view'),
     path('report/<int:streamer_id>/<int:lobby_id>',
          report, name='report'),
-    path('search_result/', SearchView.as_view(), name='search_view')
 ]

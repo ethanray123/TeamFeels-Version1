@@ -1,5 +1,5 @@
 from .home import HomeView, SearchView
-from .lobby import LobbyView
+from .lobby import LobbyView, CommentView
 from .userform import UserFormView
 from .streamupdate import StreamFormView
 from .streamer import StreamerView
