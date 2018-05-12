@@ -31,7 +31,7 @@
                             {% endif %}
 
                             {% if lobby.owner == request.user and stream.streamers.user.id == request.user.id%}
-                            
+
                             <a href="{% url 'stream:edit_stream' stream.id lobby.id %}" class="btn-floating blue"><i class="tiny material-icons">edit</i></a>
 
                             {% endif %}
@@ -70,18 +70,20 @@
     var ctr = 0;
 $(function(){
     $("button#send").click(function(){
-        $.ajax({
-            type: 'GET',
-            url: 'comments/',
-            data: {'comment_text': $("input#comment").val(),
-                'lobby_pk': '{{ lobby.pk }}',
-                'valid': "true"
-            },
-            success: function(data){
-                console.log(data);
-                $("#comment").val("");
-            }
-        });
+        if($("input#comment").val()){
+            $.ajax({
+                type: 'GET',
+                url: 'comments/',
+                data: {'comment_text': $("input#comment").val(),
+                    'lobby_pk': '{{ lobby.pk }}',
+                    'valid': "true"
+                },
+                success: function(data){
+                    console.log(data);
+                    $("#comment").val("");
+                }
+            });
+        }
     });
 });
 // var ctr = 0;
