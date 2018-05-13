@@ -2,10 +2,10 @@
 {% load static %}
 
 {% block styles %}
-<link rel="stylesheet" type="text/css" href="{% static 'stream/register.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'stream/streamcreate_form.css' %}" />
 {% endblock styles %}
 
-{% block title %}Register{% endblock title %}
+{% block title %}Create Stream{% endblock title %}
 
 {% block content %}
 	<br>
@@ -13,12 +13,11 @@
 		<div id="register" class="col s3">
 			<div class="col s12 m12 l6">
         <div class="card-panel">
-          <h4 class="header2 deep-purple-text">Register</h4>
+          <h4 class="header2 deep-purple-text">Create Stream</h4>
             <div class="row">
               	<form class="col s12" action="" method="post" enctype="multipart/form-data">
 								{% csrf_token %}
 								{% include 'stream/form-template.html' %}
-
 	              	<div class="form-group">
 	              		<div class="row">
 		                    <div class="input-field col s12">
@@ -33,7 +32,7 @@
             	</form>
             	<br>
 
-				<a href="{% url 'login' %}" class="btn waves-effect waves-light deep-purple">Go Back to Login</a>
+				<a href="{% url 'stream:home' %}" class="btn waves-effect waves-light deep-purple">Go Back</a>
           </div>
         </div>
       </div>
