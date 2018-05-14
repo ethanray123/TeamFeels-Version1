@@ -80,11 +80,8 @@ class UpdateLobbyView(UpdateView):
     form_class = LobbyForm
     template_name = "stream/updatelobby_form.html"
 
-    def form_valid(self, form):
-        lobby = form.save(commit=False)
-        lobby.save()
-        return HttpResponseRedirect(
-            reverse('stream:lobby-detail', args=[lobby.pk]))
+    def get_success_url(self):
+        return reverse('stream:lobby-detail', args=[self.object.pk])
 
 
 class DeleteLobbyView(DeleteView):
