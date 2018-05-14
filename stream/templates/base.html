@@ -14,8 +14,8 @@
 </head>
 <body>
 	<main>
-	
-	
+
+
 	<!-- <header class="container center-align">
 		<h2 class="deep-purple-text">Streaming App</h2>
 	</header> -->
@@ -26,6 +26,7 @@
 			<div class="nav-wrapper deep-purple">
 				<a href="{% url 'home' %}" class="brand-logo">Game On</a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><a href="{% url 'stream:create_lobby' %}">Create Lobby</a></li>
 					<li><a href="{% url 'home' %}">Home</a></li>
 					<li><a href="{% url 'logout' %}">logout</a></li>
 				</ul>
