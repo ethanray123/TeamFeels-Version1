@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from stream.models import Stream
+from stream.models import Stream, Lobby
 from django import forms
 
 
@@ -15,3 +15,9 @@ class StreamForm(forms.ModelForm):
     class Meta:
         model = Stream
         fields = ['title', 'thumbnail']
+
+
+class LobbyForm(forms.ModelForm):
+    class Meta:
+        model = Lobby
+        fields = ['lobbyname', 'logo', 'description']
