@@ -21,3 +21,10 @@ class LobbyForm(forms.ModelForm):
     class Meta:
         model = Lobby
         fields = ['lobbyname', 'logo', 'description']
+
+    def __init__(self, *args, **kwargs):
+        super(LobbyForm, self).__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({
+                'autocomplete': 'off',
+            })
