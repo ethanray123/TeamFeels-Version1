@@ -39,6 +39,8 @@
 
                             <a href="{% url 'stream:edit_stream' stream.id lobby.id %}" class="btn-floating blue"><i class="tiny material-icons">edit</i></a>
 
+                            <a href="{% url 'stream:delete_stream' stream.id %}" class="btn-floating red"><i class="tiny material-icons">delete</i></a>
+
                             {% endif %}
                         </li>
                         <br>
@@ -58,7 +60,7 @@
             <ul id="comment_holder">
             </ul>
             <input type="text" name="comment" id="comment">
-            <button id="send">send</button>
+            <button class="btn deep-purple" id="send">send</button>
         </div>
         <!-- end -->
         {% else %}

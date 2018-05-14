@@ -1,7 +1,9 @@
 from django.urls import path
-from .views import HomeView, UserFormView, LobbyView, \
-    StreamerView, subscribe, SearchView, report, StreamFormView,\
-    CreateLobbyView, CommentView, UpdateLobbyView, DeleteLobbyView
+from .views import (
+    HomeView, UserFormView, LobbyView,
+    StreamerView, subscribe, SearchView, report, StreamFormView,
+    CreateLobbyView, CommentView, UpdateLobbyView, DeleteLobbyView,
+    StreamCreateView, StreamDeleteView)
 
 
 app_name = 'stream'
@@ -28,4 +30,6 @@ urlpatterns = [
          UpdateLobbyView.as_view(), name='update_lobby'),
     path('lobby/<int:pk>/delete_lobby',
          DeleteLobbyView.as_view(), name='delete_lobby'),
+    path('add/', StreamCreateView.as_view(), name='create_stream'),
+    path('remove/<int:pk>', StreamDeleteView.as_view(), name='delete_stream')
 ]

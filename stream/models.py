@@ -90,7 +90,7 @@ class Stream(models.Model):
     )
 
     def __str__(self):
-        return self.streamers.user.username
+        return self.title
 
 
 class Subscription(models.Model):
