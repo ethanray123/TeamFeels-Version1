@@ -12,6 +12,11 @@
         {% endif %}
         {% if lobby %}
         <h3 class="deep-purple-text">Live now in {{lobby}}</h3>
+        {% if lobby.owner == user %}
+        <!-- update the url -->
+        <a href="{% url 'stream:update_lobby' lobby.id %}">Update Lobby</a><br>
+        <a href="{% url 'stream:delete_lobby' lobby.id %}">Delete Lobby</a>
+        {% endif %}
         <div class="row">
         <ul class="collection">
             <li class="collection-item col m4">
@@ -69,47 +74,51 @@
 {% endblock content %}
 {% block additionalJS %}
 <script src="{% static 'stream/js/lobby.js' %}"></script>
+
 <script>
     var ctr = 0;
-$(function(){
-    $("button#send").click(function(){
-        $.ajax({
-            type: 'GET',
-            url: 'comments/',
-            data: {'comment_text': $("input#comment").val(),
-                'lobby_pk': '{{ lobby.pk }}',
-                'valid': "true"
-            },
-            success: function(data){
-                console.log(data);
-                $("#comment").val("");
+    $(function(){
+        $("button#send").click(function(){
+            if($("input#comment").val()){
+                $.ajax({
+                    type: 'GET',
+                    url: 'comments/',
+                    data: {'comment_text': $("input#comment").val(),
+                        'lobby_pk': '{{ lobby.pk }}',
+                        'valid': "true"
+                    },
+                    success: function(data){
+                        console.log(data);
+                        $("#comment").val("");
+                        $("button#send").blur();
+                    }
+                });
             }
         });
     });
-});
-// var ctr = 0;
-(function ajax_get(){
-    setTimeout(function(){
-        $.ajax({
-            type: 'GET',
-            url: 'comments/',
-            data: {'comment_text': $("input#comment").val(),
-                'lobby_pk': '{{ lobby.pk }}',
-                'valid': ""
-            },
-            success: function(data){
-                if(ctr != data.comments.length){
-                    ctr = data.comments.length;
-                    $("#comment_holder").empty();
-                    $.each(data.comments, function(ctr, comment){
-                        $("#comment_holder").append("<li>" + comment.publisher__user__username + " : "+ comment.comment +"</li>");
-                    });
+    // var ctr = 0;
+    (function ajax_get(){
+        setTimeout(function(){
+            $.ajax({
+                type: 'GET',
+                url: 'comments/',
+                data: {'comment_text': $("input#comment").val(),
+                    'lobby_pk': '{{ lobby.pk }}',
+                    'valid': ""
+                },
+                success: function(data){
+                    if(ctr != data.comments.length){
+                        ctr = data.comments.length;
+                        $("#comment_holder").empty();
+                        $.each(data.comments, function(ctr, comment){
+                            $("#comment_holder").append("<li>" + comment.publisher__user__username + " : "+ comment.comment +"</li>");
+                        });
+                    }
+                    console.log(data);
+                    ajax_get();
                 }
-                console.log(data);
-                ajax_get();
-            }
-        });
-    }, 1000);
-})();
+            });
+        }, 1000);
+    })();
 </script>
 {% endblock additionalJS %}
