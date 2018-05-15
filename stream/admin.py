@@ -4,7 +4,7 @@ from .models import Stream, Streamer, Lobby,\
 
 
 class StreamerLobby(admin.ModelAdmin):
-    list_display = ('lobbies', 'streamers')
+    list_display = ('lobbies', 'title', 'streamers')
     list_filter = ['lobbies']
 
 
