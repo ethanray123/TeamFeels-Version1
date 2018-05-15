@@ -14,7 +14,7 @@ class UserForm(forms.ModelForm):
 class StreamForm(forms.ModelForm):
     class Meta:
         model = Stream
-        fields = ['title', 'thumbnail']
+        fields = ['title', 'thumbnail', 'lobbies']
 
 
 class LobbyForm(forms.ModelForm):
@@ -28,3 +28,4 @@ class LobbyForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'autocomplete': 'off',
             })
+
