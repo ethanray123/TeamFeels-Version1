@@ -28,4 +28,3 @@ class LobbyForm(forms.ModelForm):
             self.fields[field].widget.attrs.update({
                 'autocomplete': 'off',
             })
-
