@@ -71,6 +71,10 @@ class Lobby(models.Model):
     def streamers(self):
         return Stream.objects.filter(lobbies=self)
 
+    def is_part_of_lobby(self, request):
+        isStreamer = Stream.objects.get(streamers__user=request.user, lobbies=self).exists()
+        return isStreamer
+
 
 # "Bridge" between streamers and lobby to prevent use of ManyToMany Field
 class Stream(models.Model):
