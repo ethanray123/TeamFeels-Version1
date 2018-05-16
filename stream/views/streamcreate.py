@@ -18,8 +18,8 @@ class StreamCreateView(CreateView):
         stream.streamers = current_streamer
         # save in database
         stream.save()
-        # return self.form_valid(form)
         return HttpResponseRedirect(reverse_lazy('stream:home'))
+
     # def post(self, request):
     #     form_class = self.get_form_class()
     #     form = self.get_form(form_class)
