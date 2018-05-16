@@ -1,8 +1,8 @@
+import json
 from django.shortcuts import get_object_or_404
 from stream.models import Report, Streamer
 from django.views.generic import View
 from django.http import HttpResponse, Http404
-import json
 
 
 class ReportView(View):

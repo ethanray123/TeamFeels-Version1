@@ -28,6 +28,7 @@
                             <br>
 
                             {% if stream.streamers.user.id != request.user.id %}
+
                                 <button id="subscribe" name="{{ stream.streamers.id }}" style="z-index: 1000;" class="btn-floating yellow darken-3"><i class="tiny material-icons">star</i></button>
                                 <button id="report" name="{{ stream.streamers.id }}" style="z-index: 1000;" class="btn-floating red"><i class="tiny material-icons">report_problem</i></button>
 
@@ -118,6 +119,7 @@
         })();
 
         $("button#subscribe").click(function(){
+            console.log($(this).attr("name"));
             $.ajax({
                 type: 'GET',
                 url: 'subscribe/',
@@ -131,6 +133,7 @@
         });
 
         $("button#report").click(function(){
+            console.log($(this).attr("name"));
             $.ajax({
                 type: 'GET',
                 url: 'report/',
@@ -142,7 +145,6 @@
                 }
             });
         });
-        // href="{% url 'stream:report' stream.streamers.id %}"
     });
 </script>
 {% endblock additionalJS %}

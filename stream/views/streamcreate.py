@@ -12,4 +12,3 @@ class StreamCreateView(CreateView):
 
     def get_success_url(self):
         return reverse_lazy('stream:home')
-

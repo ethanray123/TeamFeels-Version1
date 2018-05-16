@@ -8,12 +8,6 @@ class StreamerLobby(admin.ModelAdmin):
     list_filter = ['lobbies']
 
 
-# class StreamerStream(admin.ModelAdmin):
-#     list_display = ('title', 'streamer')
-#     list_filter = ['title']
-
-
-# admin.site.register(Stream, StreamerStream)
 admin.site.register(Streamer)
 admin.site.register(Lobby)
 admin.site.register(Stream, StreamerLobby)
