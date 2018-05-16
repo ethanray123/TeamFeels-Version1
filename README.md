@@ -28,7 +28,7 @@ Then get the project files from the repository by using:
 ```
 git clone https://github.com/ethanray123/TeamFeels-Version1.git
 ```
-
+Note: You need to install git to use this command but is not required for the project as a whole.
 
 ## Running the tests
 
