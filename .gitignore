@@ -1,4 +1,19 @@
-db.sqlite3
+### Django ###
+*.log
+*.pot
+*.pyc
 __pycache__/
-media/
 local_settings.py
+db.sqlite3
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# media
+media/

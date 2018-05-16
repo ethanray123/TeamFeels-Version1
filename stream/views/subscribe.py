@@ -1,5 +1,4 @@
 import json
-
 from django.shortcuts import get_object_or_404
 from stream.models import Subscription, Streamer
 from django.views.generic import View
