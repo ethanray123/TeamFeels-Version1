@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (
     HomeView, UserFormView, LobbyView,
-    StreamerView, subscribe, SearchView, report, StreamFormView,
+    StreamerView, SubscribeView, ReportView, SearchView, StreamFormView,
     CreateLobbyView, CommentView, UpdateLobbyView, DeleteLobbyView,
     StreamCreateView, StreamDeleteView)
 
@@ -17,13 +17,11 @@ urlpatterns = [
          name='lobby-detail'),
     path('streamer/<int:pk>', StreamerView.as_view(),
          name='streamer-detail'),
-    path('subscribe/<int:streamer_id>/<int:lobby_id>',
-         subscribe, name='subscribe'),
+    path('lobby/subscribe/', SubscribeView.as_view(), name='subscribe'),
     path('search_result/', SearchView.as_view(), name='search_view'),
     path('lobby/comments/',
          CommentView.as_view(), name='comment_view'),
-    path('report/<int:streamer_id>/<int:lobby_id>',
-         report, name='report'),
+    path('lobby/report/', ReportView.as_view(), name='report'),
     path('lobby/create_lobby',
          CreateLobbyView.as_view(), name='create_lobby'),
     path('lobby/<int:pk>/update_lobby',

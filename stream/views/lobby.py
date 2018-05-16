@@ -1,5 +1,4 @@
 import json
-
 from django.views.generic import DetailView, View, DeleteView, CreateView, \
     UpdateView
 from stream.models import Lobby, Comment, Streamer
