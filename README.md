@@ -1,9 +1,68 @@
 # TeamFeels-Version1
-I added new branches corresponding to their respective purposes. As mentioned by mentors, this is a better approach to nomenclature. I advise we follow this naming convention.
 
-Also please be aware that I added new cards in the Trello page. If you choose to pursue a task, please assign yourself to that card so that we won't be caught doing the same task.
+A convenient multi-cast streaming application.
 
-Thanks.
+## Getting Started
 
-I created a new branch coz I cannot push on the branch that joe created
-error: src refspec LobbyHandling does not match any.
+These instructions will get you a copy of the project up and running on your local machine.
+
+### Prerequisites
+
+What things you need to install the software and how to install them
+
+```
+Python version 3.0 or later
+Django version 2.0 or later
+```
+
+### Installing
+
+Create a virtual environment by follwing this guide: http://virtualenvwrapper.readthedocs.io/en/latest/install.html
+Then install the prequisites using:
+
+```
+pip install django
+```
+Then get the project files from the repository by using:
+
+```
+git clone https://github.com/ethanray123/TeamFeels-Version1.git
+```
+
+
+## Running the tests
+
+Currently no tests are created for this system
+
+## Deployment
+
+Add additional notes about how to deploy this on a live system
+
+## Built With
+
+Python
+Django
+Jquery
+
+## Contributing
+
+Left blank
+
+## Versioning
+
+Left blank
+
+## Authors
+
+Joe Brotzer
+Ethan Mosqueda
+Rendave Lecciones
+
+## License
+
+Left blank
+
+## Acknowledgments
+
+* Thanks to Peter for helping us with this code and helping us correct mistakes
+
