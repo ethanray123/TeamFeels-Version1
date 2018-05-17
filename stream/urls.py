@@ -1,17 +1,18 @@
 from django.urls import path
 from .views import (
-    HomeView, UserFormView, LobbyView,
-    StreamerView, SubscribeView, ReportView, SearchView, StreamFormView,
-    CreateLobbyView, CommentView, UpdateLobbyView, DeleteLobbyView,
-    StreamCreateView, StreamDeleteView)
+    HomeView, StreamerCreateView, LobbyView,
+    StreamerView, SubscribeView, ReportView,
+    CreateLobbyView, UpdateLobbyView, DeleteLobbyView,
+    StreamCreateView, StreamUpdateView, StreamDeleteView,
+    SearchView, CommentView,)
 
 
 app_name = 'stream'
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
-    path('register/', UserFormView.as_view(), name='register'),
+    path('register/', StreamerCreateView.as_view(), name='register'),
     path('streamedit/<int:pk>/<int:lobby_id>',
-         StreamFormView.as_view(),
+         StreamUpdateView.as_view(),
          name='edit_stream'),
     path('lobby/<int:pk>', LobbyView.as_view(),
          name='lobby-detail'),
