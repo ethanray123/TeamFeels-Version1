@@ -1,10 +1,12 @@
 from .home import HomeView, SearchView
-from .lobby import LobbyView, CommentView, CreateLobbyView, \
-    UpdateLobbyView, DeleteLobbyView
-from .userform import UserFormView
+from .lobby import LobbyView, CommentView 
+from .lobby import CreateLobbyView
+from .lobby import UpdateLobbyView
+from .lobby import DeleteLobbyView
+from .streamer import StreamerCreateView
 from .streamer import StreamerView
 from .subscribe import SubscribeView
 from .report import ReportView
-from .streamupdate import StreamFormView
-from .streamcreate import StreamCreateView
-from .streamdelete import StreamDeleteView
+from .stream import StreamCreateView
+from .stream import StreamUpdateView
+from .stream import StreamDeleteView
